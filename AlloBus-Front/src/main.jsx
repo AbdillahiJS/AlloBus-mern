@@ -5,7 +5,7 @@ import App from './pages/Home'
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import {createBrowserRouter,RouterProvider } from "react-router-dom";
 import SplitScreen from './admin/component/splitScreen'
-
+import { PacmanLoader } from "react-spinners";
 
 
 const queryClient = new QueryClient()
@@ -120,7 +120,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
      <QueryClientProvider client={queryClient}>
       
-        <Suspense fallback={<div className='font-bold text-lg'>Loading ...</div>}>
+        <Suspense fallback={
+                          <div className='flex justify-center items-center h-screen ring-1'>
+                            <PacmanLoader color='#fea636' size={50}/>
+                           </div>
+                          }>
            <RouterProvider router={router}/>
         </Suspense>
 

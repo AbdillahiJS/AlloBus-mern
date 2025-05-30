@@ -13,12 +13,7 @@ const useGetBooking = (id) => {
     queryKey:['booking-ID'],
     queryFn:async()=>{
         try {
-           let getBooking = await api.get(`/users/booking/${id}`,{
-            headers:{
-                'Authorization':getLocalStorage('connexion')
-            }
-           })
-     
+           let getBooking = await api.get(`/users/booking/${id}`)
            return getBooking?.data
           } catch (error) {
             console.log(error)

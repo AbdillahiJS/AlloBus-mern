@@ -273,21 +273,29 @@ const updateUserReservation=async(req,res)=>{
 }
 
 
-// const singleUserInfo=async(req,res)=>{
+const singleUserInfo=async(req,res)=>{
 
-//   try {
+  try {
+        // let userInfo = await Enregistrer.findOne({_id:req.params.userId})
+        // let userInfoReservation = await Booking.find({reservateurId:req.params.userId})
 
+        let [userInfo,userInfoReservation] = await Promise.all([
+  
+          Enregistrer.findOne({_id:req.params.userId}),
+          Booking.find({reservateurId:req.params.userId}).sort({createdAt:-1})
+      
+         ])
 
 //  req.io.emit('Rendu','All the reservation');
 
-//     res.json({message:`L'utilisateur a bien rendu la voiture de location`})
+    res.json({userInfo,userInfoReservation})
     
-//   } catch (error) {
-//     console.log(error);
-//     res.json({ message: `Server error in updateUserReservation > ${err.message}` })
-//   }
+  } catch (error) {
+    console.log(error);
+    res.json({ message: `Server error in singleUserInfo > ${err.message}` })
+  }
 
-// }
+}
 
 
 
@@ -301,6 +309,7 @@ module.exports={AddCarRental,getAllCar,getSingleCarRental,
   getAllUsersReservation,
   singleUserReservation,
   updateUserReservation,
-  usersSquareResulte
+  usersSquareResulte,
+  singleUserInfo
  
 }

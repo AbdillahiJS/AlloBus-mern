@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
-import TimePicker from 'react-time-picker';
-import classNames from "react-day-picker/style.module.css";
+
 import { Button } from "../../components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useEffect } from "react";
 import { useMutation,useQueryClient } from "@tanstack/react-query";
-import api from "../../api/apiLayers";
+import api, { getAccessToken } from "../../api/apiLayers";
 import { getLocalStorage } from "../../helpers/setLocalStorage";
 import useGetBooking from "../../hooks/useGetBooking";
 import { useStore } from '@nanostores/react';
 import { resterTime, tripTimeStore } from "../../helpers/countDown";
-import { Link, useParams } from 'react-router-dom'
-
+import { Link, useParams,useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
+import { OctagonAlert } from 'lucide-react';
 
 // import { io } from 'socket.io-client';
 // import { useEffect } from "react"
@@ -36,6 +36,7 @@ const DateAndTimePrise = ({prix}) => {
     const {id} = useParams()
     
     let {getAllBooking,countD} = useGetBooking(id)
+   let navigate = useNavigate()
     
     // let {days,hours,minutes,seconds} = resterTime(booking?.datePrise,booking?.dateRetour)
     
@@ -102,6 +103,7 @@ const DateAndTimePrise = ({prix}) => {
 
   return (
     <>
+    <Toaster position="top-right"/>
 <div className="flex gap-x-4 ring-1 w-full mt-4 p-2 flex-col lg:flex-row">
      
         <div className="flex flex-col lg:flex-row w-full lg:w-1/2 ring-2 ring-blue-600 w-1/2 p-1 gap-x-4">  
@@ -140,6 +142,7 @@ const DateAndTimePrise = ({prix}) => {
         <Label className=' p-2'>Date de retour</Label>
         <Button
         className="px-4 py-4 border rounded bg-white shadow w-full"
+        
         onClick={() => setShowCalendarRetour(!showCalendarRetour)}
         >
 
@@ -203,15 +206,26 @@ const DateAndTimePrise = ({prix}) => {
         <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-500/80 hover:bg-purple-900/100  text-white text-lg"
          disabled={!!getAllBooking}
 
-        onClick={()=>{
 
-          mutate({
-            prise: new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000),
-            retour: new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000),
-            voitureId:id,
-            prixTotal:parseInt(prix) ,
-            days:Math.floor(Math.abs(new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000)- new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000)) / (1000 * 60 * 60 * 24)) || 1
-          });
+
+        onClick={()=>{
+          if (getAccessToken()) {
+            
+                      mutate({
+                        prise: new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000),
+                        retour: new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000),
+                        voitureId:id,
+                        prixTotal:parseInt(prix) ,
+                        days:Math.floor(Math.abs(new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000)- new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000)) / (1000 * 60 * 60 * 24)) || 1
+                      });
+            
+          }
+          // toast('Vous devez de se connecter pour le Reservation')
+          toast.custom(<div className="flex gap-x-4  bg-white p-2 text-orange-600 rounded shadow-sm shadow-black">
+            <OctagonAlert/>
+            <p>Vous devez de se connecter pour le Reservation</p>
+          </div>)
+          // navigate('/connexion')
            
         }}
         

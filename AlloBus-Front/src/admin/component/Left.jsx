@@ -39,7 +39,7 @@ const Left = () => {
        
         
      <div className="   gap-x-1 flex flex-col justify-center items-center p-4 ">
-                 <img src={Logo} className='w-20 h-20 rotate-380'/> 
+                 {/* <img src={Logo} className='w-20 h-20 rotate-380'/>  */}
                 <span className="text-[#123151] text-xl font-bold ">AlloBus</span>
                 
        </div> 
@@ -51,8 +51,8 @@ const Left = () => {
                         <NavLink to={`${nav.link}`} end
                         className={({ isActive }) => 
                         isActive ?
-                        'w-full  font-bold flex text-black items-center ' 
-                        : ' w-full  text-[#6D6D6D] flex  items-center' 
+                        'w-full  font-bold flex text-black items-center' 
+                        : ' w-full  text-slate-600/80 font-medium flex  items-center' 
                     } >
 
                         

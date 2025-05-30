@@ -87,7 +87,7 @@ const VoitureLayout = () => {
             <HeroVoiture/>
          </div>
 
-    <main className="lg:mx-[15%] mx-[8%] mb-15  flex justify-center ring-1"> 
+    <main className="lg:mx-[15%] mx-[8%] mb-15  flex justify-center "> 
             
     
             <div className="w-[20%] p-2 sticky top-0 self-start h-[calc(100vh-2rem)]  ring-1 ring-red-600 hidden" >

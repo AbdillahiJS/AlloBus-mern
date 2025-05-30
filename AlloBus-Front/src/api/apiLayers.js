@@ -1,5 +1,7 @@
 import axios from 'axios'
+import { getLocalStorage } from '../helpers/setLocalStorage';
 
+export let getAccessToken=()=>getLocalStorage('connexion')
 
 const axiosParams = {
     // Base URL should be set via environment
@@ -7,6 +9,15 @@ const axiosParams = {
   };
 
   const axiosInstance = axios.create(axiosParams);
+
+
+  axiosInstance.interceptors.request.use(config => {
+    const token = getAccessToken();
+    if (token) {
+      config.headers.Authorization = `${token}`;
+    }
+    return config;
+  });
 
 
   const api = (axios) => {

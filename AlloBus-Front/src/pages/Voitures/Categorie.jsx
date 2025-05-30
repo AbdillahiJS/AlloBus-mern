@@ -8,16 +8,14 @@ import Boite from '../../assets/boite.svg';
 
 const Categorie = () => {
   const [searchParams] = useSearchParams();
-  // console.log(searchParams);
+  
   let allKeys = Array.from(searchParams.keys())
   
-// console.log('voituresLists >',voituresLists);
+
  let filterVoitures = voituresLists.filter(ele=>{
-      //  console.log(allKeys.includes(ele.categorie));
       return allKeys.includes(ele.categorie)
     })
 
-// console.log('filterVoitures >',filterVoitures);
 
 
 
@@ -29,7 +27,7 @@ const Categorie = () => {
       </span>
 
     <div className="grid grid-cols-3 gap-6 p-6">
-    {/* shadow-slate-400 */}
+  
      {
           filterVoitures.map(voiture=>{
             const {id,imageBus,titre,passager,climatiseur,boiteVitesse,prix,categorie }=voiture

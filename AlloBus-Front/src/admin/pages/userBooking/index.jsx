@@ -11,9 +11,9 @@ import * as yup from "yup";
 import { useMutation } from "@tanstack/react-query"
 import toast, { Toaster } from 'react-hot-toast';
 import { CircleCheckBig } from 'lucide-react';
+import { MoveLeft } from 'lucide-react';
 import { io } from 'socket.io-client';
 import { useEffect } from "react"
-
 
 const socket = io('http://localhost:8888');
 
@@ -116,11 +116,18 @@ useEffect(() => {
   return (
     <>
     <Toaster position="top-right"/>
+    <div className="flex mt-2 w-full">
+        <div className="hover:bg-slate-300/40 w-10 h-10 rounded-full flex justify-center items-center">
+        <Link to='/admin/booking'>
+        <MoveLeft/>
+        </Link>
+        </div>
+      </div>
     <div className="mx-[15%] mt-8 flex flex-col justify-between items-center p-2 ">
+      
   
-    <div className=" w-full mt-4">
+    <div className=" w-full ">
     
-
          
 
         <section  className='bg-white p-2 rounded shadow-sm shadow-[#f1dfcd]'>

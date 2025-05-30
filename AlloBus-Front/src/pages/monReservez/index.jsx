@@ -9,16 +9,17 @@ import { CircleCheckBig } from 'lucide-react';
 import { io } from 'socket.io-client';
 import { useEffect } from "react"
 
+// ,{
+//   headers:{
+//     'Authorization':getLocalStorage('connexion')
+//   },
+// }
 
 const socket = io('http://localhost:8888');
 
 let fetchAllReservation=async()=>{
   try {
-    let fetchCarReservation =await api.get('users/myrervation',{
-      headers:{
-        'Authorization':getLocalStorage('connexion')
-      },
-    })
+    let fetchCarReservation =await api.get('users/myrervation')
     return fetchCarReservation?.data
   } catch (error) {
     console.log(error)
@@ -63,7 +64,7 @@ const  MONRESERVEZ= () => {
 
           let {days,hours,minutes,seconds} = resterTime(reservation?.datePrise,reservation?.dateRetour)
 
-        return <section key={reservation?._id} className='bg-white p-2 rounded shadow-sm shadow-[#f1dfcd]'>
+        return <section key={reservation?._id} className='bg-white p-2 rounded shadow-sm shadow-[#f1dfcd] my-4'>
         <div  className="flex justify-between mb-4">
           <div className="flex gap-x-2">
           <p className='font-medium'>{reservation?.datePrise?.split('T')[0]}</p> /
