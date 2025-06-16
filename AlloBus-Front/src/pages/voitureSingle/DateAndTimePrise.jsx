@@ -15,12 +15,6 @@ import { Link, useParams,useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import { OctagonAlert } from 'lucide-react';
 
-// import { io } from 'socket.io-client';
-// import { useEffect } from "react"
-
-
-// const socket = io('http://localhost:8888');
-
 
 
 
@@ -35,22 +29,18 @@ const DateAndTimePrise = ({prix}) => {
    
     const {id} = useParams()
     
-    let {getAllBooking,countD} = useGetBooking(id)
+    let {getAllBooking} = useGetBooking(id)
    let navigate = useNavigate()
     
-    // let {days,hours,minutes,seconds} = resterTime(booking?.datePrise,booking?.dateRetour)
-    
-    console.log({getAllBooking,countD})
+   console.log(getAllBooking)
+ 
     
     const formatter = new Intl.DateTimeFormat("fr-DJ", {
-      dateStyle: 'full',       // or 'medium', 'short'
-      timeStyle: 'short',      // includes hours and minutes
-      timeZone: 'Africa/Djibouti' // force Djibouti local time
+      dateStyle: 'full',      
+      timeStyle: 'short',      
+      timeZone: 'Africa/Djibouti'
     });
     
-  // console.log(formatter.format(new Date(getAllBooking?.datePrise)))
-  // console.log(formatter.format(new Date(getAllBooking?.dateRetour)))
-
     const handleDateSelectPrise = (date) => {
         setSelectedDatePrise(date);
         setShowCalendarPrise(false);  
@@ -66,47 +56,26 @@ const DateAndTimePrise = ({prix}) => {
     const {mutate}=useMutation({
       mutationFn:async(timeDate)=>{
         try {
-             let sendBookingReq = await api.post('/users/booking',timeDate,{
-                headers:{
-                  'Authorization':getLocalStorage('connexion')
-                },
-              })
+             let sendBookingReq = await api.post('/users/booking',timeDate)
               return sendBookingReq?.data
         } catch (error) {
           console.log(error);
+          throw new Error(error.response?.data?.message || "Une erreur s’est produite lors de l'envoyer des données ");
         }
       },
       onSuccess:(data)=>{
-        console.log(data)
-        queryClient.invalidateQueries(['booking']);
+        queryClient.invalidateQueries(['booking'])
       }
     })
-
-
-  //   const handler = (id) => {
-  //     console.log('getBooking ID from socket >', id)
-  //     queryClient.invalidateQueries(['booking', id])
-  //   }
-    
-  //   useEffect(() => {
-  
-  //     socket.on('getBooking', handler)
-  
-  //     return () => {
-  //       socket.off('getBooking', handler)
-  //     }
-  //   }, [queryClient]) // ✅ now this is fine because it's stable
-  // }
-
 
 
 
   return (
     <>
     <Toaster position="top-right"/>
-<div className="flex gap-x-4 ring-1 w-full mt-4 p-2 flex-col lg:flex-row">
+<div className="flex gap-x-4  mt-4 p-2 flex-col lg:flex-row">
      
-        <div className="flex flex-col lg:flex-row w-full lg:w-1/2 ring-2 ring-blue-600 w-1/2 p-1 gap-x-4">  
+        <div className="flex flex-col  lg:flex-row w-full   w-1/2 p-1 gap-x-4">  
 
         <div className="relative inline-block w-1/2 w-full lg:w-1/2">
         <Label className=' p-2'>Date de prise en charge</Label>
@@ -115,11 +84,8 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarPrise(!showCalendarPrise)}
         >
         
-
-         { getAllBooking? getAllBooking.datePrise?.split('T')[0] :selectedDatePrise? selectedDatePrise.toLocaleDateString() :'Selectionnez Date Prise'}
+ { getAllBooking?.completed ? selectedDatePrise? selectedDatePrise.toLocaleDateString() :'Selectionnez Date Prise' :getAllBooking.datePrise?.split('T')[0] }  
       
-     
-
         </Button>
 
         {showCalendarPrise && (
@@ -146,8 +112,8 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarRetour(!showCalendarRetour)}
         >
 
-       {getAllBooking? getAllBooking?.dateRetour?.split('T')[0] :selectedDateRetour? selectedDateRetour.toLocaleDateString() :'Selectionnez Date Retour'} 
-         
+ { getAllBooking?.completed ? selectedDateRetour? selectedDateRetour.toLocaleDateString() :'Selectionnez Date Retour' : getAllBooking?.dateRetour?.split('T')[0]}  
+
         </Button>
 
         {showCalendarRetour && (
@@ -164,47 +130,14 @@ const DateAndTimePrise = ({prix}) => {
         </div>
 
       </div>
-      <div className="flex flex-col gap-x-4 lg:w-1/2 ring-1 ring-yellow-600/70 my-1 ">
-
-        <div className="p-1">
-          <p className="">
-            {
-             getAllBooking?.totalPrix ? ( 
-                <div>
-                Total : <span className='font-medium'>
-                   {getAllBooking?.totalPrix } * { getAllBooking?.daysRemaining } jours   
-                    = {getAllBooking ?.totalPrix*getAllBooking?.daysRemaining} fr 
-                  </span> 
-
-                </div> 
-                  ):''
-            }
-          
-          </p>
-          {/* <p className="">
-            Jours : <span className='font-medium'>{getAllBooking?.daysRemaining} jours</span> 
-          </p>  */}
-
-        </div>
-
-        <div className="flex gap-x-2 gap-y-2">
-          <h1>Temps Restant :</h1>
-          <p className=" font-medium">{countD?.days} Jours</p>
-         <p className="font-medium">{countD?.hours} heure</p>
-         <p className="font-medium">{countD?.minutes} minutes</p>
-         {/* <p className="font-medium">{countD?.seconds } secondes</p>     */}
-
-        </div>
-       
-
-      </div>
+      
 
 </div> 
 
-<div className="ring-1 lg:w-1/2  w-full">
+<div className="  w-full">
 
         <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-500/80 hover:bg-purple-900/100  text-white text-lg"
-         disabled={!!getAllBooking}
+         disabled={!getAllBooking?.completed}
 
 
 
@@ -218,14 +151,17 @@ const DateAndTimePrise = ({prix}) => {
                         prixTotal:parseInt(prix) ,
                         days:Math.floor(Math.abs(new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000)- new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000)) / (1000 * 60 * 60 * 24)) || 1
                       });
-            
-          }
-          // toast('Vous devez de se connecter pour le Reservation')
+                      navigate('/reservez')
+          }else{
+
           toast.custom(<div className="flex gap-x-4  bg-white p-2 text-orange-600 rounded shadow-sm shadow-black">
             <OctagonAlert/>
             <p>Vous devez de se connecter pour le Reservation</p>
           </div>)
-          // navigate('/connexion')
+
+          }
+          
+        
            
         }}
         

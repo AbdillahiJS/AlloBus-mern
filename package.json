@@ -1,0 +1,9 @@
+{
+    "name": "AlloBus-mern",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "node server.js",
+      "heroku-postbuild": "cd AlloBus/AlloBus-front && npm install && npm run build"
+    }
+  }
+  

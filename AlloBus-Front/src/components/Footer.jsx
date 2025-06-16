@@ -12,7 +12,7 @@ const Footer = () => {
 
         <div className="flex items-center justify-around w-full mt-8 mb-8">
         <div className="  gap-x-1 flex flex-col items-center">
-                <img src={Logo} className='w-16 h-16 '/>
+                {/* <img src={Logo} className='w-16 h-16 '/> */}
                 <span className="text-[#2687e8] text-lg font-bold ">AlloBus</span>
                 
                 </div>

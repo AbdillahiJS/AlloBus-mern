@@ -42,7 +42,7 @@ const columns = [
     id: 'busImage',
     cell: info => {
       console.log(info.getValue())
-      return <div className=' flex justify-center'>
+      return <div className=' flex justify-center my-1'>
         {
            info.getValue()===[] || info.getValue()[0]==='' ? <Image/> :<img src={info.getValue()[0]} width='70' height='70' className=''/>
         }
@@ -170,7 +170,7 @@ const table = useReactTable({
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id} className='border-b-2 border-solid border-blue-600 '>
               {headerGroup.headers.map(header => (
-                <th key={header.id} className='p-1'>
+                <th key={header.id} className='py-1'>
                   {header.isPlaceholder
                     ? null
                     : flexRender(

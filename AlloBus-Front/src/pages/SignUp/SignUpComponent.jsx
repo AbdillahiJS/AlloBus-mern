@@ -25,8 +25,7 @@ let EnrigistreSchema = yup.object({
 
 const SignUpComponent = () => {
     const [response, setResponse] = useState('')
-    // const [erreur, setErreur] = useState('')
-
+   
     const { control, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(EnrigistreSchema)
     });
@@ -37,7 +36,8 @@ const SignUpComponent = () => {
              let enregistrerReq=await api.post('/users/enregistrer',enregistrerData)
               return enregistrerReq?.data
         } catch (error) {
-            console.log(error)
+            
+            throw new Error(error.response?.data?.message || " Une erreur s’est produite lors de l'envoyer des données d'enregistrement ");
         }
     },
     onSuccess:(data)=>{

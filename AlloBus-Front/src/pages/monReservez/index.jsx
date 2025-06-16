@@ -8,21 +8,19 @@ import { getLocalStorage } from '../../helpers/setLocalStorage'
 import { CircleCheckBig } from 'lucide-react';
 import { io } from 'socket.io-client';
 import { useEffect } from "react"
+import { Button } from '../../components/ui/button'
 
-// ,{
-//   headers:{
-//     'Authorization':getLocalStorage('connexion')
-//   },
-// }
+
 
 const socket = io('http://localhost:8888');
 
 let fetchAllReservation=async()=>{
   try {
-    let fetchCarReservation =await api.get('users/myrervation')
+    let fetchCarReservation =await api.get('/users/myrervation')
     return fetchCarReservation?.data
   } catch (error) {
     console.log(error)
+
   }
 }
 
@@ -36,13 +34,15 @@ const  MONRESERVEZ= () => {
     queryFn:fetchAllReservation
   
   })
-  // console.log('getAllMyReservation >',getAllMyReservation)
+  
 
   useEffect(() => {
 
     socket.on('Rendu', (id) => {
       console.log('update booking>')
       queryClient.invalidateQueries(['userBookingId']);
+      queryClient.invalidateQueries(['booking-ID']);
+      
     });
    
     
@@ -70,6 +70,9 @@ const  MONRESERVEZ= () => {
           <p className='font-medium'>{reservation?.datePrise?.split('T')[0]}</p> /
           <p className='font-medium'>{reservation?.dateRetour?.split('T')[0]}</p>
           </div>
+
+         
+
           <div className="flex ">
           <p className='font-medium'>{reservation?.reservateurId?.email}</p>
           
@@ -91,25 +94,25 @@ const  MONRESERVEZ= () => {
           
           }
           <CardHeader className=''>
-          <div className="flex justify-between">
-            <div className="flex justify-between p-1 w-1/2">
-              <div className="gap-x-2">
+          <div className="flex justify-between gap-x-2">
+            <div className="flex justify-between  p-1 w-1/2">
+              <div className="">
                   Temps Restant : 
-                  <span className='font-medium'>
-                  {days} Jours 
+                  <span className='font-medium mr-2  ml-1'>
+                  {days} Jours
+                  </span>
+
+                  <span className='font-medium mr-2'>
+                  { hours} Heure
                   </span>
 
                   <span className='font-medium'>
-                  { hours} heures 
-                  </span>
-
-                  <span className='font-medium'>
-                  { minutes} minutes
+                  { minutes} min
                   </span>
               </div>
 
 
-                <div className="">
+                <div className="ml-1 ">
                 Total Prix : <span className='font-medium'>{reservation?.totalPrix} fr </span>
                 </div>
 

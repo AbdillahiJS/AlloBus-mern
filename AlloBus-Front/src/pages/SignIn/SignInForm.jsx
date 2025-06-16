@@ -11,6 +11,7 @@ import api from "../../api/apiLayers";
 import { getLocalStorage, setLocalStorage } from "../../helpers/setLocalStorage";
 import toast from 'react-hot-toast';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 let connexionSchema = yup.object({
 
@@ -24,6 +25,8 @@ let connexionSchema = yup.object({
 const SignInForm = () => {
     const [response,setResponse] =useState('')
 
+   let navigate = useNavigate()
+
     const { control, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(connexionSchema)
     });
@@ -34,27 +37,25 @@ const SignInForm = () => {
                  let enregistrerReq=await api.post('/users/connecter',connecterData)
                  return enregistrerReq?.data
             } catch (error) {
-                console.log(error)
+                throw new Error(error.response?.data?.message || "Une erreur s’est produite lors de l'envoyer des données.");
             }
-        }, onSuccess:(data)=>{
+        }, 
+        onSuccess:(data)=>{
           
                 setLocalStorage('connexion',data?.token)
-                setResponse(data?.message)
                 
-         
+                
+              if (data?.token) {
+                    navigate('/profile')
+                }
+                setResponse(data?.message)
            
           }
      })
 
 
 let handleSignIn =(data)=>{
-  console.log(data)
-
-
     mutate(data)
-    
-  
-
 }
 
 

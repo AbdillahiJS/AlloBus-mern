@@ -1,7 +1,6 @@
-import CardVoiture from "./CardVoiture"
+// import CardVoiture from "./CardVoiture"
 import {voituresLists}  from "../../data/voituresLists"
 import {Card, CardContent, CardFooter, CardHeader} from '../../components/ui/card'
-
 import { User } from 'lucide-react';
 import { SunSnow } from 'lucide-react';
 import Boite from '../../assets/boite.svg';
@@ -17,9 +16,9 @@ const socket = io('http://localhost:8888');
 let fetchAllData=async()=>{
   try {
     let fetchCar =await api.get('/admin/')
-    return fetchCar.data
+    return fetchCar?.data
   } catch (error) {
-    console.log(error)
+    throw new Error(error.response?.data?.message || " Une erreur s’est produite lors de la récupération des données admin");
   }
 }
 
@@ -55,7 +54,7 @@ useEffect(() => {
          {
           getAllVoiture?.map(voiture=>{
             const {_id,busImage,titre,passagers,climatisseur,boiteVitesse,prix,categorie }=voiture
-            return <Card key={_id} className=' border-none w-full shadow-md shadow-[#f5ddc6] p-2
+            return <Card key={_id} className='ring-1 ring-slate-400 border-none w-full shadow-md shadow-[#f5ddc6] p-2
              bg-white hover:border-4 hover:p-1 hover:border-[#f5ddc6] hover:border-solid  '>
               <Link to={`${_id}`}>
                           <CardHeader className=' '>
@@ -63,7 +62,7 @@ useEffect(() => {
                           className='w-full h-36'
                           />
                         </CardHeader>
-                        <CardContent className="  ">
+                        <CardContent className=" ">
                               <h1 className='text-md font-medium my-2 px-2 '>{titre}</h1>
                                 <div className="pt-2 px-1">
                                   <div className='flex  justify-between w-full '>

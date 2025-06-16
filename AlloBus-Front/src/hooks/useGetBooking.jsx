@@ -16,8 +16,8 @@ const useGetBooking = (id) => {
            let getBooking = await api.get(`/users/booking/${id}`)
            return getBooking?.data
           } catch (error) {
-            console.log(error)
-            throw new Error('Failed to fetch bookings')
+           
+            throw new Error(error.response?.data?.message ||'Une erreur s’est produite lors de la récupération des données bookings')
           }
         },
         

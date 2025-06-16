@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { useSuspenseQuery } from "@tanstack/react-query";
 import api from "../../../api/apiLayers";
 
-
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 
@@ -78,6 +78,8 @@ console.log('userInfo > ',userInfoReservation)
         <div className="w-full flex flex-col mt-2">
 
    <h1 className="flex justify-center font-bold capitalize tracking-wider my-2">Historique de Reservation  { userInfoReservation?.length ===0? <span className="ml-1 font-bold capitalize tracking-wider text-blue-600"> Vide</span>:null}</h1>
+   <ScrollArea className="h-[250px] w-full rounded-md">
+
    
 
           <div className="  flex flex-col justify-around p-2 gap-y-2">
@@ -103,7 +105,7 @@ console.log('userInfo > ',userInfoReservation)
 
           </div>
 
-
+  </ScrollArea>
 
 
 

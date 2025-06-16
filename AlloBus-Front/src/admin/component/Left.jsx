@@ -20,11 +20,7 @@ const navSide = [
        link:'booking',
        text:'booking',
     },
-    {
-       icon:<LayoutDashboard/>,
-       link:'setting',
-       text:'setting',
-    },
+
 ]
 
 

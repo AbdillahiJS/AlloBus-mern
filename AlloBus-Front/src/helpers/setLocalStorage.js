@@ -16,3 +16,8 @@ export let getLocalStorage =(key)=>{
           }
       
 }
+
+
+export let removeLocalStorage =(key)=>{
+      localStorage.removeItem(key)
+}
