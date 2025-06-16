@@ -7,6 +7,8 @@ const { Server } = require('socket.io');
 let adminRoute =require('./routes/admin.js')
 let usersRoute =require('./routes/users.js')
 const app = express();
+const path = require('path');
+const useragent = require("express-useragent");
 
 
 app.use(cors({
@@ -25,7 +27,7 @@ const io = new Server(server, {
 
 
 
-// app.use(cors());
+
 app.use(express.json());
 
 
@@ -35,7 +37,7 @@ app.use((req, res, next) => {
 });
 
 
-
+app.use(useragent.express());
 
 app.use('/admin',adminRoute);
 app.use('/users',usersRoute);
@@ -50,13 +52,20 @@ io.on('connection', (socket) => {
 
 
 
+// app.use(express.static(path.join(__dirname, '../AlloBus-front/dist')));
 
-const PORT = process.env.PORT || 5000;
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../AlloBus-front/dist/index.html'));
+// });
+
+
+
+
+const PORT = process.env.PORT || 5500;
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log(`database is connected`)
     server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   })
   .catch((err) => console.log(err));

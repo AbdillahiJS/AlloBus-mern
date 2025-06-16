@@ -5,6 +5,9 @@ const jwt =require('jsonwebtoken')
 const nodemailer = require('nodemailer');
 const emailTemplate=require('../emailTemplate.js')
 const Booking =require('../model/userModel/bookingModel')
+const cloudinary =require('../utile')
+const requestIp = require("request-ip");
+const dayjs = require('dayjs')
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -34,11 +37,9 @@ const sendConfirmationEmail = async (email, token) => {
       `,
       });
 
-     console.log('Email de confirmation envoyé à', email);
+  }catch(error){
 
-  }catch(err){
-
-     console.log('SendEmailError >',err);
+     res.json({ message: `Server error in Registration ${error.message}` }); 
   }
 
 };
@@ -74,16 +75,18 @@ let enregistrer=async(req,res)=>{
         
     
         return res.json({ message: `Utilisateur est bien belle Enrigistrer il vous reste confirmer votre address Email` });
-      } catch (err) {
-        console.log(`Server error in Registration ${err}`)
-         res.json({ message: `Server error in Registration ${err.message}` });
+      } catch (error) {
+        
+         res.json({ message: `Server error in Registration ${error.message}` });
       }
     
 }
 
 
  let connecter =async(req, res) => {
+
     const { emailSignIn, passwordSignIn} = req.body;
+
     try {
       const utilisateur = await Enregistrer.findOne({email:emailSignIn});
       if (!utilisateur) return res.json({ message: `Cet utilisateur n'existe pas` });
@@ -96,10 +99,12 @@ let enregistrer=async(req,res)=>{
   
       const token = jwt.sign({ userId: utilisateur._id }, process.env.JWT_SECRET);
      return res.json({token,message:'Vous etes Connecter'});
-    } catch (err) {
-     return res.json({ message: `Server error in connexion > ${err.message}` });
+    } catch (error) {
+     return res.json({ message: `Server error in connexion > ${error.message}` });
     }
   };
+
+
 
 
   let getConfirmation=async(req,res)=>{
@@ -115,10 +120,11 @@ let enregistrer=async(req,res)=>{
     res.json({message:`Utilisateur a bien Confirme l'email vous pouvez se connecter pour continuer Louer`})
      
   } catch (error) {
-    res.json({ message: `Server error in getConfirmation > ${err.message}` })
+    res.json({ message: `Server error in getConfirmation > ${error.message}` })
   }
 
   }
+
 
   const getAllUsers=async(req,res)=>{
 
@@ -128,7 +134,7 @@ let enregistrer=async(req,res)=>{
       res.json({getAllUsers})
       
     } catch (error) {
-      res.json({ message: `Server error in getAllUsers > ${err.message}` })
+      res.json({ message: `Server error in getAllUsers > ${error.message}` })
     }
 
   }
@@ -141,108 +147,117 @@ let enregistrer=async(req,res)=>{
 
     try {
      let reservez =new Booking({
-
       datePrise: req.body.prise,
-
       dateRetour: req.body.retour,
-
       totalPrix: req.body.prixTotal,
-
       reservateurId: req.decoded.userId,
-
       voitureId: req.body.voitureId,
-
       daysRemaining: req.body.days,
-
      })
 
-    //  console.log(reservez);
-      await reservez.save()
+     await reservez.save()
+    
       res.json({message:'felicitation de Reservez'})
       
     } catch (error) {
       console.log(error);
-      res.json({ message: `Server error in booking > ${err.message}` })
+      res.json({ message: `Server error in booking > ${error.message}` })
     }
 
   }
-
 
 
   function countDown(prise, retour) {
     let days, hours, minutes, seconds;
   
-    const start = new Date(prise);
-    const end = new Date(retour);
-    const now = new Date();
+    const start = dayjs(prise);
+    const end = dayjs(retour);
+    const now = dayjs();
   
-    if (now >= start) {
-
-      const diffTotal = end - start; // in ms
-      const diffSinceStart = now - start; // in ms
-      const remaining = Math.max(diffTotal - diffSinceStart, 0); // in ms
+    if (now.isAfter(start) || now.isSame(start)) {
+      // Case: trip already started
+      const diffTotal = end.diff(start, 'second');       // in seconds
+      const diffSinceStart = now.diff(start, 'second');  // in seconds
+      const remaining = Math.max(diffTotal - diffSinceStart, 0); // remaining in seconds
   
-      days = Math.floor(remaining / (1000 * 60 * 60 * 24));
-      hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-      seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-
+      days = Math.floor(remaining / (60 * 60 * 24));
+      hours = Math.floor((remaining % (60 * 60 * 24)) / (60 * 60));
+      minutes = Math.floor((remaining % (60 * 60)) / 60);
+      seconds = remaining % 60;
+  
     } else {
-
-      const tripLength = end - start; // in ms
+      // Case: trip not yet started
+      const tripLength = end.diff(start, 'second'); // total trip duration in seconds
   
-      days = Math.floor(tripLength / (1000 * 60 * 60 * 24));
-      hours = Math.floor((tripLength % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      minutes = Math.floor((tripLength % (1000 * 60 * 60)) / (1000 * 60));
-      seconds = Math.floor((tripLength % (1000 * 60)) / 1000);
+      days = Math.floor(tripLength / (60 * 60 * 24));
+      hours = Math.floor((tripLength % (60 * 60 * 24)) / (60 * 60));
+      minutes = Math.floor((tripLength % (60 * 60)) / 60);
+      seconds = tripLength % 60;
     }
-
-   return {days,hours,minutes,seconds}
-    
-    
+  
+    return { days, hours, minutes, seconds };
   }
+
+
+
+
+
+
+
+
+
+   const getBooking=async(req,res)=>{
   
+     try {
 
+     let getAllBooking= await Booking.findOne({reservateurId:req.decoded.userId,voitureId:req.params.bookingId}).populate('reservateurId')
 
+    //  if(getAllBooking?.rendu){
 
+    //   await Booking.findOneAndUpdate({reservateurId:req.decoded.userId,voitureId:req.params.bookingId},{
+    //     $set:{
+    //       rendu:true
+    //     }
+    //   })
 
-
-  const getBooking=async(req,res)=>{
-    console.log('booking-ID >',req.params.bookingId)
-
-    try {
-     let getAllBooking=await Booking.findOne({reservateurId:req.decoded.userId,voitureId:req.params.bookingId})
-
-    //  console.log('getBooking >',getAllBooking)
-    let countD=countDown(getAllBooking?.datePrise,getAllBooking?.dateRetour)
-
-    if(countD?.days === 0){
-
-      await Booking.findOneAndUpdate({reservateurId:req.decoded.userId,_id:getAllBooking?._id,completed:false},{
-        $set:{
-          completed:true
-        }
-      })
-    }
-    req.io.emit('booking-ID','for completion');
-
-      res.json({getAllBooking,countD})
+    //  }
+  
+      res.json({getAllBooking})
       
-    } catch (error) {
-      console.log(error);
-      res.json({ message: `Server error in getBooking > ${err.message}` })
+     } catch (error) {
+       console.log(error);
+       res.json({ message: `Server error in getBooking > ${error.message}` })
     }
 
-  }
+   }
 
 
 
   const getMyReservation=async(req,res)=>{
-    console.log('Mon reservation ID >',req.decoded)
 
     try {
 
      let getAllMyReservation=await Booking.find({reservateurId:req.decoded.userId}).populate('reservateurId voitureId').sort({createdAt:-1})
+
+     let oneBookingNotCOmpleted= await Booking.findOne({reservateurId:req.decoded.userId,completed:false})
+
+     const result= countDown(oneBookingNotCOmpleted?.datePrise,oneBookingNotCOmpleted?.dateRetour)
+
+    
+
+     if(result?.days === 0){
+
+      await Booking.findOneAndUpdate({reservateurId:req.decoded.userId,_id:oneBookingNotCOmpleted?._id,completed:false},{
+        $set:{
+          completed:true
+        }
+      })
+
+    }
+//  console.log('oneBookingNotCOmpleted > ',oneBookingNotCOmpleted)
+
+ 
+
 
      req.io.emit('myReservation','All the reservation');
 
@@ -257,7 +272,94 @@ let enregistrer=async(req,res)=>{
 
   }
 
+
+  const userProfile=async(req,res)=>{
+    const ip = requestIp.getClientIp(req)
+    const information = {
+      ip,
+      userAgent: req.useragent,
+    };
+
+  
+    try {
+          
+  
+          let [userInfo,userInfoReservation] = await Promise.all([
+    
+            Enregistrer.findOne({_id:req.decoded.userId}),
+            Booking.find({reservateurId:req.decoded.userId}).sort({createdAt:-1})
+        
+           ])
+  
+  
+  
+      res.json({userInfo,userInfoReservation,information})
+      
+    } catch (error) {
+      console.log(error);
+      res.json({ message: `Server error in singleUserInfo > ${err.message}` })
+    }
+  
+  }
+
+
+
+
+  const addImageProfile=async(req,res)=>{
+   
+    try {
+      let getPublicIdProfile = await Enregistrer.findOne({_id:req.decoded.userId}).select('publicIdProfile -_id')
+     
+  
+        await cloudinary.uploader.destroy(getPublicIdProfile.publicIdProfile)
+    
+    await  Enregistrer.findOneAndUpdate({_id:req.decoded.userId},{
+        $set:{
+          profileImage:req?.file?.path,
+          publicIdProfile:req?.file?.filename
+        }
+      })
+  
+      res.json({message:'La photo du profile a ete ajouter'})
+      
+    } catch (error) {
+      console.log(error);
+      res.json({ message: `Server error in singleUserInfo > ${err.message}` })
+    }
+  
+  }
  
 
+let completeRegistration=async(req,res)=>{
+  // console.log('body > ',req.body)
+ 
 
-module.exports= {enregistrer,connecter,getConfirmation,getAllUsers,booking,getBooking,getMyReservation}
+try {
+
+  await  Enregistrer.findOneAndUpdate({_id:req.decoded.userId},{
+  $set:{  
+
+  prenom:req.body.editPrenom,
+  nom:req.body.editNom,
+  dateNaissance:req.body.editDateNaissance,
+  phoneNumber:req.body.editPhoneNumber,
+  sex:req.body.editSex,
+  isCompleted:true
+
+  }
+  })
+  
+  res.json({message:` L'enrigistration est complet `})
+  
+} catch (error) {
+  res.json({ message: `Server error in completeRegistration > ${err.message}` })
+}
+
+  
+}
+
+
+
+
+module.exports= {enregistrer,connecter,getConfirmation,getAllUsers,booking,getBooking
+  ,getMyReservation,userProfile,addImageProfile,completeRegistration}

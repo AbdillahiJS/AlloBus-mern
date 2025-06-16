@@ -5,11 +5,7 @@ const Booking = require('../model/userModel/bookingModel')
 
 
 
-
-
 const AddCarRental=async(req,res)=>{
-
-
 
 let imageUrl =req?.files?.map(file=>file?.path)
 
@@ -96,7 +92,7 @@ const updateSingleCarRental=async(req,res)=>{
 
     await VoitureLocation.findOneAndUpdate({ _id: req.params.id },{
     $set:{
-        genre:req.body.editGenre,
+      genre:req.body.editGenre,
       titre:req.body.editNomDeBus,
       passagers:req.body.editNombreDePassager,
       climatisseur:req.body.editClimatisseur,
@@ -145,10 +141,7 @@ const dashBoardSquareResulte=async(req,res)=>{
        Booking.countDocuments()
     ])
 
-  //   let countActiveUser =await Enregistrer.find({isActive:true}).countDocuments()
-  //   let countNotActiveUser =await Enregistrer.find({isActive:false}).countDocuments()
-  // console.log('countActiveUser > ',countActiveUser);
-  // console.log('countNotActiveUser > ',countNotActiveUser);
+
     res.json({countCarRental,countUsers,countBooking})
 
   } catch (error) {
@@ -183,7 +176,7 @@ const getAllUsersReservation=async(req,res)=>{
   try {
 
    let usersReservation=await Booking.find({})
-   console.log('usersReservation > ',usersReservation)
+  //  console.log('usersReservation > ',usersReservation)
 
     res.json({usersReservation})
     
@@ -276,17 +269,13 @@ const updateUserReservation=async(req,res)=>{
 const singleUserInfo=async(req,res)=>{
 
   try {
-        // let userInfo = await Enregistrer.findOne({_id:req.params.userId})
-        // let userInfoReservation = await Booking.find({reservateurId:req.params.userId})
-
+        
         let [userInfo,userInfoReservation] = await Promise.all([
   
           Enregistrer.findOne({_id:req.params.userId}),
           Booking.find({reservateurId:req.params.userId}).sort({createdAt:-1})
       
          ])
-
-//  req.io.emit('Rendu','All the reservation');
 
     res.json({userInfo,userInfoReservation})
     
@@ -302,7 +291,11 @@ const singleUserInfo=async(req,res)=>{
 
 
 
-module.exports={AddCarRental,getAllCar,getSingleCarRental,
+module.exports={
+  
+  AddCarRental,
+  getAllCar,
+  getSingleCarRental,
   deletSingleCarRental,
   updateSingleCarRental,
   dashBoardSquareResulte,

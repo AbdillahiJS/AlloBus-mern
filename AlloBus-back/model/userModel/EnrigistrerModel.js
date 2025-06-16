@@ -3,6 +3,13 @@ const { Schema } = mongoose
 
 const enregistrerSchema= new Schema({
 
+    profileImage:{
+        type:String,
+    },
+    publicIdProfile:{
+        type:String
+    },
+
 prenom:{
         type:String,
         },
@@ -25,6 +32,23 @@ isActive: {
     type:Boolean,
     default:false
 },
+
+dateNaissance: {
+    type:String,
+},
+
+phoneNumber: {
+    type:Number,
+},
+
+sex: {
+    type:String,
+   
+},
+isCompleted:{
+    type:Boolean,
+    default:false
+}
 
 
 
