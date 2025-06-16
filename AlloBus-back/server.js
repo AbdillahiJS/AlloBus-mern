@@ -52,11 +52,11 @@ io.on('connection', (socket) => {
 
 
 
-// app.use(express.static(path.join(__dirname, '../AlloBus-front/dist')));
+app.use(express.static(path.join(__dirname, '../AlloBus-front/dist')));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../AlloBus-front/dist/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../AlloBus-front/dist/index.html'));
+});
 
 
 
