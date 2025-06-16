@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node AlloBus-back/server.js",
-    "build": "cd AlloBus/AlloBus-front && npm install && npm run build"
+    "build": "cd AlloBus-front && npm install && npm run build"
   }
 }
