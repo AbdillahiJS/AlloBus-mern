@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const Hero = () => {
     let navigate =useNavigate()
   return (
-    <div className='flex mx-[18%] mb-10 mt-10 h-full flex justify-around bg-[#FDF2E7]'>
+    <div className='flex mx-[18%] mb-10 mt-6 h-full flex justify-around bg-[#FDF2E7]'>
         <div className="w-1/3    flex  justify-center  flex-col">
 
             <div className="text-xl font-bold break-all  px-4 flex flex-col justify-around p-1 h-[110px]">
@@ -17,10 +17,6 @@ const Hero = () => {
                 <p>avec <span className='text-[#1572D3]'>AlloBus</span></p>
            </div>
             <div className=" mt-4 justify-start flex flex-col px-4">
-                {/* <div className="  ">
-                <p className='text-sm'>Get a car wherever and whenever you need</p>
-                <p className='text-sm'> with your IOS and Android device.</p>
-                </div> */}
 
                 <div className="pt-6  ">
                     <Button variant='outline' className='bg-white w-1/3 border-none ring-1 ring-blue-500'

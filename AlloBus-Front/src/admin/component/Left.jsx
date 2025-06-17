@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom"
 import { LayoutDashboard } from 'lucide-react';
-import Logo from '../../assets/logoImage.png'
 import { Users } from 'lucide-react';
 import { ShoppingBasket } from 'lucide-react';
 

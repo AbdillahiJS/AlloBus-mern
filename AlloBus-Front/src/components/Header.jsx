@@ -1,15 +1,16 @@
 import { Link, NavLink, useLocation } from "react-router-dom"
-import Logo from '../assets/logoBus.png'
+
 import { Bus } from 'lucide-react';
 import { Button } from "./ui/button";
 import useProfile from "../hooks/useProfile";
 import { getLocalStorage } from "../helpers/setLocalStorage";
 import { ChevronDown } from 'lucide-react';
 import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover"
-  import { Separator } from "@/components/ui/separator"
-  import { Power } from 'lucide-react';
-  import { UserRoundPen } from 'lucide-react';
-  import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
+import { Separator } from "@/components/ui/separator"
+import { Power } from 'lucide-react';
+import { UserRoundPen } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
+import logoBus from '../assets/logoBus.png'
 
 const navs=['Home','Nos Voitures','Mon reservation']
 const Links=['/','/voitures','/reservez']
@@ -23,11 +24,12 @@ const Header = () => {
   return (
     <header className=" mx-[10%] flex justify-between items-center p-2 ">
         <div className="ml-10 w-[40%] flex items-center gap-x-10 ">
-               <div className=" flex flex-col items-center  p-1">
                 <Link to='/'>
-                <span className="text-[#0b5aaf] text-lg font-bold ">AlloBus</span>
-                </Link>
+               <div className=" flex flex-col items-center justify-center p-1 ">
+                <img src={logoBus} alt='' className="w-12 h-12 "  />
+                <span className="text-[#0b5aaf] text-md font-bold ">AlloBus</span>
                 </div>
+                </Link>
                 
                 {
                     location.pathname==='/connexion' || location.pathname==='/enregistre' || location.pathname.startsWith('/confirmation')
