@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# frontend
+AlloBus-front/node_modules
+AlloBus-front/.env
+AlloBus-front/.env.production
+AlloBus-front/dist
+
+# backend
+AlloBus-back/node_modules
+AlloBus-back/.env

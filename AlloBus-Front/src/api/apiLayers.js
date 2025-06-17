@@ -4,8 +4,8 @@ import { getLocalStorage } from '../helpers/setLocalStorage';
 export let getAccessToken=()=>getLocalStorage('connexion')
 
 const axiosParams = {
-    // Base URL should be set via environment
-    baseURL: process.env.NODE_ENV === "development" ? "http://localhost:8888" : VITE_API_URL,
+    
+    baseURL: import.meta.env.VITE_API_URL,
   };
 
   const axiosInstance = axios.create(axiosParams);
