@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom"
 import { LayoutDashboard } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { ShoppingBasket } from 'lucide-react';
+import logoBus from '../../assets/logoBus.png'
 
 const navSide = [
     {
@@ -34,8 +35,8 @@ const Left = () => {
        
         
      <div className="   gap-x-1 flex flex-col justify-center items-center p-4 ">
-                 {/* <img src={Logo} className='w-20 h-20 rotate-380'/>  */}
-                <span className="text-[#123151] text-xl font-bold ">AlloBus</span>
+                <img src={logoBus} alt='' className="w-12 h-12 "  />
+                <span className="text-[#123151] text-lg font-bold ">AlloBus</span>
                 
        </div> 
 

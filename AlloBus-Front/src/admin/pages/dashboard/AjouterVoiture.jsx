@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 
 const AjouterVoiture = () => {
 
-  // top-[60%]
+  
  
 
   return (
@@ -26,9 +26,7 @@ const AjouterVoiture = () => {
       <AddForm/>
 
         </div>
-        {/* <DialogFooter>
-          <Button variant='outline' onClick={()=>handleSubmitForm}>Add</Button>
-        </DialogFooter> */}
+       
       </DialogContent>
     </Dialog>
 

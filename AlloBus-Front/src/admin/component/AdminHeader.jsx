@@ -1,12 +1,12 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { Menu } from 'lucide-react';
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
 
 const AdminHeader = () => {
   const location = useLocation().pathname
   console.log(location);
   console.log( location.split('/') );
-  // 
+  
   return (
     <div className=' bg-white flex justify-between lg:p-4 p-2'>
        
@@ -14,12 +14,10 @@ const AdminHeader = () => {
       ring-1 p-1 lg:hidden md:hidden sm:flex gap-4 flex-1"
       >
 
-        <Menu className='ring-1'/>
-        <span className='ring-1'>AlloBus</span>
 
      </div>
-     {/* location.split('/admin/')[1]?.split('/') */}
-        <div className="ring-1 ring-red-600 flex flex-1  items-center font-medium px-1 capitalize sm:text-sm hidden lg:flex md:flex">
+     
+        <div className=" flex flex-1  items-center font-medium px-1 capitalize sm:text-sm hidden lg:flex md:flex">
 
           {
           location ==='/admin'?'Dashboard'
@@ -27,10 +25,17 @@ const AdminHeader = () => {
           }
 
           </div>
-        <div className=" lg:flex flex-2 mx-2 md:flex hidden ring-1">
-            {/* <input type="text" placeholder='Search ....' className='bg-slate-50 w-full outline-2 p-1 outline-[#fff3e7] placeholder:text-black'/> */}
+
+        <div className=" lg:flex flex-2 mx-2 md:flex hidden">
         </div>
-        <div className="ring-1 ring-red-600 flex flex-1 sm:flex-2 items-center px-1">profile</div>
+           
+        <div className=" flex flex-1 justify-center sm:flex-2 items-center px-1  gap-x-4">
+        <Avatar className='size-9 ring-1'>
+                <AvatarImage  src={'https://avatar.iran.liara.run/public/boy'} className=''/>
+                <img src="https://avatar.iran.liara.run/public/boy" />
+              </Avatar>
+              <span>Admin</span>
+        </div>
     </div>
   )
 }

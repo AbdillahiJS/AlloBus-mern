@@ -80,11 +80,11 @@ console.log('userInfo > ',userInfoReservation)
    <h1 className="flex justify-center font-bold capitalize tracking-wider my-2">Historique de Reservation  { userInfoReservation?.length ===0? <span className="ml-1 font-bold capitalize tracking-wider text-blue-600"> Vide</span>:null}</h1>
    <ScrollArea className="h-[250px] w-full rounded-md">
 
-   
+
 
           <div className="  flex flex-col justify-around p-2 gap-y-2">
             {userInfoReservation?.map(userReservez=>{
-              return <div className="flex flex-col my-1 gap-x-2 p-1 py-2 rounded-sm odd:bg-slate-300/50 ring-1 ring-slate-300 hover:bg-[#ffdfc2] hover:text-black hover:ring-0 hover:cursor-pointer">
+              return <div key={userReservez._id}  className="flex flex-col my-1 gap-x-2 p-1 py-2 rounded-sm odd:bg-slate-300/50 ring-1 ring-slate-300 hover:bg-[#ffdfc2] hover:text-black hover:ring-0 hover:cursor-pointer">
                 <Link to={`/admin/booking/${userReservez._id}`}>
                 <div className="flex justify-center gap-x-2 font-bold ">
                      <p className="text-sm">{ userReservez?.datePrise?.split('T')[0]}</p> / 
