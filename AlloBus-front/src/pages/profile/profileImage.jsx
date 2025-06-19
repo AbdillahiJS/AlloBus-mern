@@ -10,6 +10,7 @@ import api from "../../api/apiLayers";
 import useProfile from "../../hooks/useProfile";
 import toast, { Toaster } from 'react-hot-toast';
 import { CircleCheckBig } from 'lucide-react';
+import { CircleUserRound } from 'lucide-react';
 
 const ProfileImage = () => {
 const {userInfo}=useProfile()
@@ -81,9 +82,8 @@ const {userInfo}=useProfile()
       :
       
       <Avatar className='size-12 ring-1'>
-            <AvatarImage src={userInfo? userInfo?.profileImage :'https://avatar.iran.liara.run/public/boy'} className=''/>
-           
-            <img src="https://avatar.iran.liara.run/public/boy" />
+            <AvatarImage src={userInfo? userInfo?.profileImage } className=''/>
+            <AvatarFallback>{userInfo?` ${userInfo?.prenom[0]} ${userInfo?.nom[0]}`: <CircleUserRound color='white'/>}</AvatarFallback>
           </Avatar>
     }
     
