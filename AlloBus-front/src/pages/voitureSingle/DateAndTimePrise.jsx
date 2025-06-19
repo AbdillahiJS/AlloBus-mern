@@ -31,8 +31,7 @@ const DateAndTimePrise = ({prix}) => {
     
     let {getAllBooking} = useGetBooking(id)
    let navigate = useNavigate()
-    
-   console.log(getAllBooking)
+   
  
     
     const formatter = new Intl.DateTimeFormat("fr-DJ", {
@@ -84,7 +83,7 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarPrise(!showCalendarPrise)}
         >
         
- { getAllBooking?.completed ? selectedDatePrise? selectedDatePrise.toLocaleDateString() :'Selectionnez Date Prise' :getAllBooking.datePrise?.split('T')[0] }  
+ { getAllBooking?.completed ? selectedDatePrise? selectedDatePrise?.toLocaleDateString() :'Selectionnez Date Prise' :getAllBooking?.datePrise?.split('T')[0] }  
       
         </Button>
 
@@ -112,7 +111,7 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarRetour(!showCalendarRetour)}
         >
 
- { getAllBooking?.completed ? selectedDateRetour? selectedDateRetour.toLocaleDateString() :'Selectionnez Date Retour' : getAllBooking?.dateRetour?.split('T')[0]}  
+ { getAllBooking?.completed ? selectedDateRetour? selectedDateRetour?.toLocaleDateString() :'Selectionnez Date Retour' : getAllBooking?.dateRetour?.split('T')[0]}  
 
         </Button>
 
