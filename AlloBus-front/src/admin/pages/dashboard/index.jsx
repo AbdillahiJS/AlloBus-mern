@@ -1,7 +1,7 @@
 import React from 'react'
 import Left from '../../component/Left'
 import Right from '../../component/Right'
-import SplitScreen from '../../component/splitScreen'
+
 import Square from '../../component/Square'
 import {Button} from '../../../components/ui/button'
 import { Pen } from 'lucide-react';

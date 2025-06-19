@@ -4,7 +4,7 @@ import './index.css'
 import App from './pages/Home'
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import {createBrowserRouter,RouterProvider } from "react-router-dom";
-import SplitScreen from './admin/component/splitScreen'
+import SplitScreen from './admin/component/SplitScreen'
 import { PacmanLoader } from "react-spinners";
 import { onlineManager } from '@tanstack/react-query';
 import NotFound from './NotFound'

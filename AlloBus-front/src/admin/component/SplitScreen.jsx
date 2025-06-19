@@ -1,18 +1,10 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
 import Left from './Left'
 import Right from './Right'
 
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+const SplitScreen = () => {
 
-
-
-const SplitScreen = ({children}) => {
-
-    // let [Left,Right] = children
-    // console.log(children);
-
+    
   return (
     <>
     
