@@ -32,7 +32,7 @@ const AdminHeader = () => {
         <div className=" flex flex-1 justify-center sm:flex-2 items-center px-1  gap-x-4">
         <Avatar className='size-9 ring-1'>
                 <AvatarImage  src={'https://avatar.iran.liara.run/public/boy'} className=''/>
-                <AvatarFallback> <CircleUserRound color='white'/> </AvatarFallback>
+                <AvatarFallback> <CircleUserRound color='black'/> </AvatarFallback>
               </Avatar>
               <span>Admin</span>
         </div>
