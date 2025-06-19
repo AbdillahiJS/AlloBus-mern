@@ -44,7 +44,7 @@ const columns = [
       console.log(info.getValue())
       return <div className=' flex justify-center my-1'>
         {
-           info.getValue()===[] || info.getValue()[0]==='' ? <Image/> :<img src={info.getValue()[0]} width='70' height='70' className=''/>
+           info.getValue().length === 0 || info.getValue()[0] === '' ? <Image/> :<img src={info.getValue()[0]} width='70' height='70' className=''/>
         }
         
         </div>

@@ -22,7 +22,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/fr'
 import relativeTime from  "dayjs/plugin/relativeTime"
 dayjs.extend(relativeTime);
-// dayjs.extend(duration)
+
 
 
 let EnrigistreUpdateSchema = yup.object({

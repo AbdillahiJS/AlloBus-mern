@@ -1,5 +1,4 @@
-// import CardVoiture from "./CardVoiture"
-import {voituresLists}  from "../../data/voituresLists"
+
 import {Card, CardContent, CardFooter, CardHeader} from '../../components/ui/card'
 import { User } from 'lucide-react';
 import { SunSnow } from 'lucide-react';

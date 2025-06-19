@@ -1,5 +1,5 @@
 
-import Header from '../../components/header'
+import Header from '../../components/Header'
 import useGetOneCarRental from '../../hooks/useGetOneCarRental'
 import Caresoul from './Caresoul'
 import { Link, useParams } from 'react-router-dom'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Header from '../components/header'
+import Header from '../components/Header'
 import HeroVoiture from '../pages/Voitures/HeroVoiture'
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from 'react'
