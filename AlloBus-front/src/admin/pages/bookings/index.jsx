@@ -81,7 +81,7 @@ const columns = [
   
 let fetchAllUsersReservation=async()=>{
   try {
-    let AllUsersReservation =await api.get('/admin/AllUsersReservation')
+    let AllUsersReservation =await api.get('/api/admin/AllUsersReservation')
     return AllUsersReservation?.data
   } catch (error) {
     console.log(error)

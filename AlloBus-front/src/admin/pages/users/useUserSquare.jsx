@@ -22,7 +22,7 @@ const useUserSquare = () => {
         queryFn:fetchUsersDashboard
       })
     
-console.log('data >',data)
+
 
   return data
 }
