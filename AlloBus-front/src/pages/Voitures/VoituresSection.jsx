@@ -14,7 +14,7 @@ const socket = io('http://localhost:8888');
 
 let fetchAllData=async()=>{
   try {
-    let fetchCar =await api.get('/admin/')
+    let fetchCar =await api.get('/api/admin/')
     return fetchCar?.data
   } catch (error) {
     throw new Error(error.response?.data?.message || " Une erreur s’est produite lors de la récupération des données admin");

@@ -33,7 +33,7 @@ const SignUpComponent = () => {
  const {mutate,isPending,isError,isSuccess} = useMutation({
     mutationFn:async(enregistrerData)=>{
         try {
-             let enregistrerReq=await api.post('/users/enregistrer',enregistrerData)
+             let enregistrerReq=await api.post('/api/users/enregistrer',enregistrerData)
               return enregistrerReq?.data
         } catch (error) {
             

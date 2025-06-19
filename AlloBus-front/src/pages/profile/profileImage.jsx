@@ -25,7 +25,7 @@ const {userInfo}=useProfile()
 
         mutationFn:async(profileImageData)=>{
           try {
-               let editProfileImageReq=await api.post('/users/profile/upload',profileImageData)
+               let editProfileImageReq=await api.post('/api/users/profile/upload',profileImageData)
                 return editProfileImageReq?.data
           } catch (error) {
               console.log(error)
@@ -76,13 +76,13 @@ const {userInfo}=useProfile()
       previewProfile ?
       <Avatar className='size-12 ring-1'>
             <AvatarImage  src={previewProfile} className=''/>
-            {/* <img src="https://avatar.iran.liara.run/public/boy" /> */}
+          
           </Avatar>
       :
       
       <Avatar className='size-12 ring-1'>
             <AvatarImage src={userInfo? userInfo?.profileImage :'https://avatar.iran.liara.run/public/boy'} className=''/>
-            {/* <AvatarFallback ></AvatarFallback> */}
+           
             <img src="https://avatar.iran.liara.run/public/boy" />
           </Avatar>
     }

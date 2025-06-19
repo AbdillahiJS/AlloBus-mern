@@ -10,7 +10,7 @@ const useProfile = () => {
         queryKey:['userProfile'],
         queryFn:async()=>{
           try {
-            let userProfile =await api.get(`/users/profile`)
+            let userProfile =await api.get(`/api/users/profile`)
             return userProfile?.data
           } catch (error) {
             throw new Error(error.response?.data?.message || " Une erreur s’est produite lors de la récupération des données profile");

@@ -99,7 +99,7 @@ const MemoizedSquare =React.memo(Square)
 
 let fetchAllData=async()=>{
   try {
-    let fetchCar =await api.get('/admin/')
+    let fetchCar =await api.get('/api/admin/')
     return fetchCar.data
   } catch (error) {
     console.log(error)

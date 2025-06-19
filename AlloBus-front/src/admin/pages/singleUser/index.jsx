@@ -17,7 +17,7 @@ let {data:{userInfo,userInfoReservation}} = useSuspenseQuery({
   queryKey:['user-info'],
   queryFn:async()=>{
     try {
-      let singleUser =await api.get(`/admin/userInfo/${userId}`)
+      let singleUser =await api.get(`/api/admin/userInfo/${userId}`)
       return singleUser?.data
     } catch (error) {
       console.log(error)

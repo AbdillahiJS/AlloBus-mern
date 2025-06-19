@@ -7,7 +7,7 @@ import { useOnlineStatus } from '../hooks/useOnlineStatus'
 const AppLayout = () => {
 
     const isOnline = useOnlineStatus() 
-    console.log('isOnline > ',isOnline)
+   
 
     if (!isOnline) return <OfflinePage/>
 

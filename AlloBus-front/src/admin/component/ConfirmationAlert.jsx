@@ -26,7 +26,7 @@ const ConfirmationAlert = ({Trash,info}) => {
 const {mutateAsync} = useMutation({
           mutationFn:async(id)=>{
             try {
-              let supprimerLocation= await api.delete(`/admin/${id}`)
+              let supprimerLocation= await api.delete(`/api/admin/${id}`)
               return supprimerLocation?.data
               
             } catch (error) {

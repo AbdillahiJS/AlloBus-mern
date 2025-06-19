@@ -9,7 +9,7 @@ const useGetOneCarRental = (id) => {
     queryKey:[id],
     queryFn:async()=>{
         try {
-           let getOne = await api.get(`/admin/${id}`)
+           let getOne = await api.get(`/api/admin/${id}`)
            return getOne?.data
         } catch (error) {
             throw new Error(error.response?.data?.message || "Erreur serveur");

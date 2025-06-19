@@ -13,7 +13,7 @@ const useGetBooking = (id) => {
     queryKey:['booking-ID'],
     queryFn:async()=>{
         try {
-           let getBooking = await api.get(`/users/booking/${id}`)
+           let getBooking = await api.get(`/api/users/booking/${id}`)
            return getBooking?.data
           } catch (error) {
            

@@ -4,8 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const AdminHeader = () => {
   const location = useLocation().pathname
-  console.log(location);
-  console.log( location.split('/') );
+  
   
   return (
     <div className=' bg-white flex justify-between lg:p-4 p-2'>
@@ -17,7 +16,7 @@ const AdminHeader = () => {
 
      </div>
      
-        <div className=" flex flex-1  items-center font-medium px-1 capitalize sm:text-sm hidden lg:flex md:flex">
+        <div className=" flex flex-1  items-center font-medium px-1 capitalize sm:text-sm lg:flex md:flex">
 
           {
           location ==='/admin'?'Dashboard'

@@ -67,7 +67,7 @@ const columns = [
 
 let fetchAllUsersData=async()=>{
     try {
-      let fetchUsers =await api.get('/users')
+      let fetchUsers =await api.get('/api/users')
       return fetchUsers?.data
     } catch (error) {
       console.log(error)

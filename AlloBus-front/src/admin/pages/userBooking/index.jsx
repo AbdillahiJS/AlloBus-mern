@@ -41,7 +41,7 @@ const queryClient = useQueryClient();
   
   let fetchSingleUserReservation=async()=>{
     try {
-      let singleUserReservation =await api.get(`/admin/userBooking/${userBookingId}`)
+      let singleUserReservation =await api.get(`/api/admin/userBooking/${userBookingId}`)
       return singleUserReservation?.data
     } catch (error) {
       console.log(error)

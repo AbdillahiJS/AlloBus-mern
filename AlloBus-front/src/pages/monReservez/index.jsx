@@ -16,7 +16,7 @@ const socket = io('http://localhost:8888');
 
 let fetchAllReservation=async()=>{
   try {
-    let fetchCarReservation =await api.get('/users/myrervation')
+    let fetchCarReservation =await api.get('/api/users/myrervation')
     return fetchCarReservation?.data
   } catch (error) {
     console.log(error)

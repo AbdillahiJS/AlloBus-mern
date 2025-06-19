@@ -34,7 +34,7 @@ const SignInForm = () => {
     const {mutate,isPending,isError,isSuccess} = useMutation({
         mutationFn:async(connecterData)=>{
             try {
-                 let enregistrerReq=await api.post('/users/connecter',connecterData)
+                 let enregistrerReq=await api.post('/api/users/connecter',connecterData)
                  return enregistrerReq?.data
             } catch (error) {
                 throw new Error(error.response?.data?.message || "Une erreur s’est produite lors de l'envoyer des données.");

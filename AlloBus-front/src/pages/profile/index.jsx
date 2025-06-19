@@ -73,7 +73,7 @@ const {mutate,isPending,isError,isSuccess} = useMutation({
 
 mutationFn:async(editEnregistrerData)=>{
     try {
-         let editEnregistrerReq=await api.post('/users/completeRegistration',editEnregistrerData)
+         let editEnregistrerReq=await api.post('/api/users/completeRegistration',editEnregistrerData)
           return editEnregistrerReq?.data
     } catch (error) {
         console.log(error)

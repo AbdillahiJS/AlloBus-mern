@@ -56,7 +56,7 @@ const DateAndTimePrise = ({prix}) => {
     const {mutate}=useMutation({
       mutationFn:async(timeDate)=>{
         try {
-             let sendBookingReq = await api.post('/users/booking',timeDate)
+             let sendBookingReq = await api.post('/api/users/booking',timeDate)
               return sendBookingReq?.data
         } catch (error) {
           console.log(error);

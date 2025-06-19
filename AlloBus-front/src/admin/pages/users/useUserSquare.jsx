@@ -7,7 +7,7 @@ import api from "../../../api/apiLayers"
 
 let fetchUsersDashboard=async()=>{
     try {
-      let usersDashbaord =await api.get('/admin/usersDashboard')
+      let usersDashbaord =await api.get('/api/admin/usersDashboard')
       // console.log('usersDashbaord > ',usersDashbaord?.data)
       return usersDashbaord?.data
     } catch (error) {

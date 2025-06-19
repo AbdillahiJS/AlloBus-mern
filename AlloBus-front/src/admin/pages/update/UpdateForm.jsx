@@ -43,7 +43,7 @@ import { Check } from "lucide-react";
             queryKey:[id],
             queryFn:async()=>{
                 try {
-                   let getOne = await api.get(`/admin/${id}`)
+                   let getOne = await api.get(`/api/admin/${id}`)
                    return getOne?.data
                 } catch (error) {
                     console.log(error)
@@ -68,7 +68,7 @@ console.log(getOneCarRental?.prix );
             const {mutateAsync} = useMutation({
                 mutationFn:async(updateData)=>{
                     try {
-                       let updateOneCar = await api.put(`/admin/${id}`,updateData)
+                       let updateOneCar = await api.put(`/api/admin/${id}`,updateData)
                        return updateOneCar?.data
                     } catch (error) {
                         console.log(error)

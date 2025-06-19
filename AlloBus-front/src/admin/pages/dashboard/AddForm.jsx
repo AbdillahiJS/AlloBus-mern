@@ -63,7 +63,7 @@ const {mutateAsync,isPending} =useMutation({
 
   mutationFn:async(addData)=>{
     try {
-          let  addCarReq= await api.post('/admin/',addData)
+          let  addCarReq= await api.post('/api/admin/',addData)
           return addCarReq.data
     } catch (error) {
      console.log(error)
