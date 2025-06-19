@@ -135,13 +135,13 @@ const DateAndTimePrise = ({prix}) => {
 
 <div className="  w-full">
 
-        <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-500/80 hover:bg-purple-900/100  text-white text-lg"
-         disabled={!getAllBooking?.completed}
+        <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-900/100 hover:bg-purple-600/80  text-white text-lg"
+        
 
 
 
         onClick={()=>{
-          if (getAccessToken()) {
+          if (getAccessToken() && selectedDatePrise==='' && selectedDateRetour==='') {
             
                       mutate({
                         prise: new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000),
@@ -155,7 +155,7 @@ const DateAndTimePrise = ({prix}) => {
 
           toast.custom(<div className="flex gap-x-4  bg-white p-2 text-orange-600 rounded shadow-sm shadow-black">
             <OctagonAlert/>
-            <p>Vous devez de se connecter pour le Reservation</p>
+            <p>Vous devez de se connecter pour le Reservation et Remplir le 2 champs</p>
           </div>)
 
           }
