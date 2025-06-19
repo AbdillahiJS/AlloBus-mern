@@ -21,12 +21,10 @@ admin.get('/AllUsersReservation',getAllUsersReservation)
 admin.get('/userInfo/:userId',singleUserInfo)
 admin.get('/userBooking/:userBookingId',singleUserReservation)
 admin.put('/userBooking/:userBookingId',updateUserReservation)
+
 admin.get('/:id',getSingleCarRental)
 admin.put('/:id',updateSingleCarRental)
 admin.delete('/:id',deletSingleCarRental)
-
-
-
 
 
 
