@@ -66,8 +66,8 @@ const Header = () => {
               <PopoverTrigger>
 
               <Avatar className='size-9 ring-1'>
-                <AvatarImage  src={userInfo?userInfo?.profileImage :'https://avatar.iran.liara.run/public/boy'} className=''/>
-                <img src="https://avatar.iran.liara.run/public/boy" />
+                <AvatarImage  src={userInfo?.profileImage} className=''/>
+                <AvatarFallback>{userInfo?` ${userInfo?.prenom[0]} ${userInfo?.nom[0]}`: <CircleUserRound color='white'/>}</AvatarFallback>
               </Avatar>
             
                
