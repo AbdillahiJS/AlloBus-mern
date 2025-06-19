@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
 import { Menu } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
+import { CircleUserRound } from 'lucide-react';
 
 const AdminHeader = () => {
   const location = useLocation().pathname
