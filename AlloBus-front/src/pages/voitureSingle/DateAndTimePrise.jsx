@@ -135,7 +135,7 @@ const DateAndTimePrise = ({prix}) => {
 
 <div className="  w-full">
 
-        <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-900/100 hover:bg-purple-600/80  text-white text-lg"
+        <Button variant='outline' className="mt-4 w-full  rounded-sm bg-purple-900/90 hover:bg-purple-600/80  text-white text-lg"
         
 
 
