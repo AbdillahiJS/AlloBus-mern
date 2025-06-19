@@ -52,9 +52,6 @@ const handleDelet =  (id) => {
 
 }
 
-// socket.on('item_deleted', () => {
-//   queryClient.invalidateQueries(['allCar']);
-// });
 
 
   return (

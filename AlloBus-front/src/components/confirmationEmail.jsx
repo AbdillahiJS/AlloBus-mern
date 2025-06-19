@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { Link, Navigate, useParams,useLocation } from 'react-router-dom'
 import api from '../api/apiLayers'
-import Header from './header'
+import Header from './Header'
 import { Button } from './ui/button'
 
 
@@ -42,7 +42,6 @@ const confirmationEmail = () => {
     </>
   )
   
-  // <Navigate to='/connexion' replace/>
 }
 
 export default confirmationEmail
