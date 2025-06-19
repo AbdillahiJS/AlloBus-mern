@@ -5,7 +5,6 @@ import Right from '../../component/Right'
 import Square from '../../component/Square'
 import {Button} from '../../../components/ui/button'
 import { Pen } from 'lucide-react';
-import { voituresLists } from '../../../data/voituresLists'
 import { Trash2 } from 'lucide-react'
 import { Toaster } from 'react-hot-toast';
 import { io } from 'socket.io-client';
