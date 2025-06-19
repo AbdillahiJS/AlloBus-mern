@@ -39,8 +39,8 @@ app.use((req, res, next) => {
 
 app.use(useragent.express());
 
-app.use('/admin',adminRoute);
-app.use('/users',usersRoute);
+app.use('/api/admin',adminRoute);
+app.use('/api/users',usersRoute);
 
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
