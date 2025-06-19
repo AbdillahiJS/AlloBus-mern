@@ -82,7 +82,7 @@ const {userInfo}=useProfile()
       :
       
       <Avatar className='size-12 ring-1'>
-            <AvatarImage src={userInfo? userInfo?.profileImage } className=''/>
+            <AvatarImage src={userInfo?.profileImage} className=''/>
             <AvatarFallback>{userInfo?` ${userInfo?.prenom[0]} ${userInfo?.nom[0]}`: <CircleUserRound color='white'/>}</AvatarFallback>
           </Avatar>
     }
