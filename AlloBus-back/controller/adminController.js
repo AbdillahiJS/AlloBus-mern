@@ -84,9 +84,6 @@ const getSingleCarRental=async(req,res)=>{
 
 
 const updateSingleCarRental=async(req,res)=>{
-    // console.log('updateId >',req.params.id);
-
-    // console.log('body >',req.body);
 
  try {
 
@@ -176,7 +173,7 @@ const getAllUsersReservation=async(req,res)=>{
   try {
 
    let usersReservation=await Booking.find({})
-  //  console.log('usersReservation > ',usersReservation)
+  
 
     res.json({usersReservation})
     

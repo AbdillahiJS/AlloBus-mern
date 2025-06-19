@@ -11,7 +11,6 @@ const upload = uploadMulter("carFolder");
 
 
 
-// obtenir Tout Voitures
 
 admin.get('/',getAllCar)
 admin.get('/dashboard',dashBoardSquareResulte)
