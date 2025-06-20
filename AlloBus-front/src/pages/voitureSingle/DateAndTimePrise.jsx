@@ -158,7 +158,7 @@ const DateAndTimePrise = ({prix}) => {
 
           toast.custom(<div className="flex gap-x-4  bg-white p-2 text-orange-600 rounded shadow-sm shadow-black">
             <OctagonAlert/>
-            <p>Vous devez de se connecter pour le Reservation et Remplir le 2 champs</p>
+            <p>Vous devez de se connecter pour le Reservation ou vous devez Remplir le 2 champs</p>
           </div>)
 
           }
