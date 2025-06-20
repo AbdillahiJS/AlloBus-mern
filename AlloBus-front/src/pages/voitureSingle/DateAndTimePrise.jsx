@@ -22,9 +22,9 @@ const DateAndTimePrise = ({prix}) => {
   
   const queryClient = useQueryClient();
 
-    const [selectedDatePrise, setSelectedDatePrise] = useState();
+    const [selectedDatePrise, setSelectedDatePrise] = useState('');
     const [showCalendarPrise, setShowCalendarPrise] = useState(false);
-    const [selectedDateRetour, setSelectedDateRetour] = useState();
+    const [selectedDateRetour, setSelectedDateRetour] = useState('');
     const [showCalendarRetour, setShowCalendarRetour] = useState(false);
    
     const {id} = useParams()
@@ -142,7 +142,7 @@ const DateAndTimePrise = ({prix}) => {
 
 
         onClick={()=>{
-          if (getAccessToken() && selectedDatePrise==='' && selectedDateRetour==='') {
+          if (getAccessToken() && selectedDatePrise !=='' && selectedDateRetour !=='') {
             
                       mutate({
                         prise: new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000),
@@ -152,7 +152,9 @@ const DateAndTimePrise = ({prix}) => {
                         days:Math.floor(Math.abs(new Date(new Date(selectedDatePrise).getTime() + 8.5 * 60 * 60000)- new Date(new Date(selectedDateRetour).getTime() + 12 * 60 * 60000)) / (1000 * 60 * 60 * 24)) || 1
                       });
                       navigate('/reservez')
-          }else{
+
+          }
+          else{
 
           toast.custom(<div className="flex gap-x-4  bg-white p-2 text-orange-600 rounded shadow-sm shadow-black">
             <OctagonAlert/>
