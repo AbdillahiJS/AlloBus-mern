@@ -83,7 +83,8 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarPrise(!showCalendarPrise)}
         >
         
- { getAllBooking?.completed ? selectedDatePrise? selectedDatePrise?.toLocaleDateString() :'Selectionnez Date Prise' :getAllBooking?.datePrise?.split('T')[0] }  
+ 
+ { selectedDatePrise? selectedDatePrise.toLocaleDateString() :'Selectionnez Date Prise' }  
       
         </Button>
 
@@ -111,7 +112,7 @@ const DateAndTimePrise = ({prix}) => {
         onClick={() => setShowCalendarRetour(!showCalendarRetour)}
         >
 
- { getAllBooking?.completed ? selectedDateRetour? selectedDateRetour?.toLocaleDateString() :'Selectionnez Date Retour' : getAllBooking?.dateRetour?.split('T')[0]}  
+ { selectedDateRetour ? selectedDateRetour.toLocaleDateString() :'Selectionnez Date Retour'}  
 
         </Button>
 
